@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { useAuth } from '@/contexts/AuthContext';
@@ -11,6 +11,14 @@ import RouteFilter, { FilterState } from '@/app/components/RouteFilter';
 import { travelPlansApi, TravelPlanDto } from '@/lib/api/travelPlans';
 
 export default function TripsPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+      <TripsPageContent />
+    </Suspense>
+  );
+}
+
+function TripsPageContent() {
   const { isAuthenticated, isLoading } = useAuth();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -150,11 +158,9 @@ export default function TripsPage() {
   return (
     <div className="min-h-screen bg-[#F4F4F2] flex flex-col">
       <Header onSearch={handleSearch} />
-
       <div className="flex flex-1 overflow-hidden">
         {/* Sidebar */}
         <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
-
         {/* Main Content */}
         <main className="flex-1 lg:ml-64 transition-all duration-300 overflow-y-auto">
           {/* Mobile menu button */}
@@ -186,7 +192,6 @@ export default function TripsPage() {
               )}
             </svg>
           </button>
-
           {/* Content Area */}
           <div className="p-4 md:p-6">
             {/* Page Header / Toolbar */}
@@ -194,7 +199,6 @@ export default function TripsPage() {
               <div className="flex flex-col gap-6">
                 {/* Page Title */}
                 <h1 className="text-3xl font-bold text-[#1C4633]">Explore Trip Routes</h1>
-                
                 {/* Unified Toolbar: Search, Filter, Create */}
                 <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
                   {/* Search Bar - Takes available space */}

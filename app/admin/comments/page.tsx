@@ -170,7 +170,7 @@ export default function AdminCommentsPage() {
     return 'Low';
   };
 
-  const getStatusColor = (status: string) => {
+  const getStatusColor = (status?: string) => {
     switch (status) {
       case 'Approved':
         return 'bg-green-100 text-green-800';
@@ -440,7 +440,7 @@ export default function AdminCommentsPage() {
                           </td>
                           <td className="px-4 py-4 whitespace-nowrap" style={{ minWidth: '100px' }}>
                             <span className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusColor(comment.status)}`}>
-                              {comment.status || 'Pending'}
+                              {(!comment.status || comment.status === 'Pending') ? 'Pending' : comment.status}
                             </span>
                           </td>
                           <td className="px-4 py-4 whitespace-nowrap" style={{ minWidth: '120px' }}>
@@ -457,7 +457,7 @@ export default function AdminCommentsPage() {
                           </td>
                           <td className="px-4 py-4 whitespace-nowrap text-right text-sm font-medium bg-white" style={{ minWidth: '160px', width: '160px' }}>
                             <div className="flex items-center justify-end gap-2" onClick={(e) => e.stopPropagation()}>
-                              {(comment.status === 'Pending' || !comment.status || comment.status === '0') && (
+                              {(!comment.status || comment.status === 'Pending') && (
                                 <>
                                   <button
                                     onClick={() => handleApprove(comment)}

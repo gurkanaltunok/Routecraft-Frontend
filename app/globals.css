@@ -1,0 +1,889 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #F4F4F2;
+  --foreground: #171717;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Mapbox Geocoder styling for transparent effect */
+.mapboxgl-ctrl-geocoder {
+  opacity: 0.9 !important;
+  transition: opacity 0.2s ease, box-shadow 0.2s ease !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+  max-width: 600px !important;
+  width: 90% !important;
+  position: relative !important;
+  z-index: 1000 !important;
+  display: block !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  margin: 16px auto 0 !important;
+}
+
+/* Ensure the geocoder container is properly positioned */
+.mapboxgl-ctrl-top-center {
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+  z-index: 1000 !important;
+  pointer-events: none !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+}
+
+.mapboxgl-ctrl-top-center .mapboxgl-ctrl-geocoder {
+  pointer-events: auto !important;
+  margin: 16px auto 0 !important;
+}
+
+.mapboxgl-ctrl-geocoder.geocoder-focused,
+.mapboxgl-ctrl-geocoder:focus-within,
+.mapboxgl-ctrl-geocoder.mapboxgl-ctrl-geocoder--active {
+  opacity: 1 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25) !important;
+}
+
+.mapboxgl-ctrl-geocoder input {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  backdrop-filter: blur(8px) !important;
+  transition: background-color 0.2s ease, outline 0.2s ease !important;
+  border: 1px solid rgba(28, 70, 51, 0.2) !important;
+  color: #333 !important;
+  font-size: 14px !important;
+}
+
+.mapboxgl-ctrl-geocoder.geocoder-focused input,
+.mapboxgl-ctrl-geocoder input:focus {
+  background-color: rgba(255, 255, 255, 1) !important;
+  outline: 2px solid rgba(28, 70, 51, 0.4) !important;
+  outline-offset: 2px !important;
+  border-color: rgba(28, 70, 51, 0.4) !important;
+}
+
+.mapboxgl-ctrl-geocoder .mapboxgl-ctrl-geocoder--suggestion {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(8px) !important;
+}
+
+/* Landing Page Animations */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.8s ease-out;
+}
+
+.animate-fade-in-delay {
+  animation: fade-in 0.8s ease-out 0.2s both;
+}
+
+.animate-fade-in-delay-2 {
+  animation: fade-in 0.8s ease-out 0.4s both;
+}
+
+/* Vertical Zoom Slider Styles */
+.zoom-slider-vertical {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 150px;
+  height: 6px;
+  background: transparent;
+  outline: none;
+  transform: rotate(-90deg);
+  transform-origin: center;
+  margin: 0;
+  padding: 0;
+  accent-color: #1C4633;
+  display: block;
+}
+
+/* WebKit (Chrome, Safari, Edge) */
+.zoom-slider-vertical::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #1C4633 !important;
+  cursor: pointer;
+  border: 2px solid white !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+  transition: all 0.2s ease;
+  margin-top: -6px;
+}
+
+.zoom-slider-vertical::-webkit-slider-thumb:hover {
+  background: #DA922B !important;
+  transform: scale(1.1);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3) !important;
+}
+
+.zoom-slider-vertical::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 6px;
+  background: linear-gradient(to right, #1C4633 0%, rgba(28, 70, 51, 0.3) 100%) !important;
+  border-radius: 3px;
+  cursor: pointer;
+  border: none !important;
+}
+
+.zoom-slider-vertical::-webkit-slider-track {
+  width: 100%;
+  height: 6px;
+  background: linear-gradient(to right, #1C4633 0%, rgba(28, 70, 51, 0.3) 100%) !important;
+  border-radius: 3px;
+  cursor: pointer;
+  border: none !important;
+}
+
+/* Firefox */
+.zoom-slider-vertical::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #1C4633 !important;
+  cursor: pointer;
+  border: 2px solid white !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+  transition: all 0.2s ease;
+  -moz-appearance: none;
+}
+
+.zoom-slider-vertical::-moz-range-thumb:hover {
+  background: #DA922B !important;
+  transform: scale(1.1);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3) !important;
+}
+
+.zoom-slider-vertical::-moz-range-track {
+  width: 100%;
+  height: 6px;
+  background: linear-gradient(to right, rgba(28, 70, 51, 0.3) 0%, rgba(28, 70, 51, 0.3) 100%) !important;
+  border-radius: 3px;
+  cursor: pointer;
+  border: none !important;
+}
+
+.zoom-slider-vertical::-moz-range-progress {
+  height: 6px;
+  background: #1C4633 !important;
+  border-radius: 3px;
+  border: none !important;
+}
+
+/* Internet Explorer / Edge (legacy) */
+.zoom-slider-vertical::-ms-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #1C4633 !important;
+  cursor: pointer;
+  border: 2px solid white !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+}
+
+.zoom-slider-vertical::-ms-track {
+  width: 100%;
+  height: 6px;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+  cursor: pointer;
+  border-width: 0;
+}
+
+.zoom-slider-vertical::-ms-fill-lower {
+  background: linear-gradient(to right, #1C4633 0%, rgba(28, 70, 51, 0.3) 100%) !important;
+  border-radius: 3px;
+  border: none !important;
+}
+
+.zoom-slider-vertical::-ms-fill-upper {
+  background: rgba(28, 70, 51, 0.2) !important;
+  border-radius: 3px;
+  border: none !important;
+}
+
+/* Custom Scrollbar Styles */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(28, 70, 51, 0.3) transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(28, 70, 51, 0.3);
+  border-radius: 3px;
+  transition: background 0.2s ease;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(28, 70, 51, 0.5);
+}
+
+/* Line clamp utility */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ================================
+   Admin Panel Styles
+   ================================ */
+
+/* Admin Panel Layout */
+.admin-layout {
+  display: flex;
+  min-height: calc(100vh - 4rem);
+}
+
+.admin-sidebar {
+  width: 280px;
+  background: linear-gradient(180deg, #1C4633 0%, #153828 100%);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+  position: fixed;
+  top: 4rem;
+  left: 0;
+  height: calc(100vh - 4rem);
+  overflow-y: auto;
+  z-index: 40;
+}
+
+.admin-main-content {
+  margin-left: 280px;
+  flex: 1;
+  min-height: calc(100vh - 4rem);
+  overflow-y: auto;
+}
+
+.admin-content {
+  flex: 1;
+  background: #F8F9FA;
+  min-height: calc(100vh - 4rem);
+  margin-left: 280px;
+  overflow-y: auto;
+}
+
+/* Admin Sidebar Navigation */
+.admin-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  margin: 4px 12px;
+  border-radius: 10px;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 500;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.admin-nav-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  transform: translateX(4px);
+}
+
+.admin-nav-item.active {
+  background: rgba(218, 146, 43, 0.2);
+  color: #DA922B;
+  border-left: 3px solid #DA922B;
+  margin-left: 9px;
+}
+
+.admin-nav-item svg {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+/* Admin Cards */
+.admin-card {
+  background: #fff;
+  border-radius: 16px;
+  border: 1px solid rgba(28, 70, 51, 0.08);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.02);
+  transition: all 0.3s ease;
+}
+
+.admin-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), 0 8px 24px rgba(0, 0, 0, 0.04);
+  transform: translateY(-2px);
+}
+
+/* Admin Stat Cards */
+.admin-stat-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px;
+  border: 1px solid rgba(28, 70, 51, 0.08);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.admin-stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #1C4633 0%, #DA922B 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.admin-stat-card:hover::before {
+  opacity: 1;
+}
+
+.admin-stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(28, 70, 51, 0.12);
+}
+
+.admin-stat-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.admin-stat-card:hover .admin-stat-icon {
+  transform: scale(1.1);
+}
+
+.admin-stat-value {
+  font-size: 2.25rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.admin-stat-label {
+  font-size: 0.875rem;
+  color: #6B7280;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.admin-stat-sublabel {
+  font-size: 0.75rem;
+  color: #9CA3AF;
+  margin-top: 4px;
+}
+
+/* Admin Tables */
+.admin-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.admin-table thead {
+  background: #F9FAFB;
+}
+
+.admin-table thead th {
+  padding: 14px 20px;
+  text-align: left;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #6B7280;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid #E5E7EB;
+}
+
+.admin-table tbody tr {
+  transition: background 0.2s ease;
+}
+
+.admin-table tbody tr:hover {
+  background: #F9FAFB;
+}
+
+.admin-table tbody td {
+  padding: 16px 20px;
+  border-bottom: 1px solid #F3F4F6;
+  font-size: 0.875rem;
+  color: #374151;
+}
+
+/* Admin Buttons */
+.admin-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+.admin-btn-primary {
+  background: linear-gradient(135deg, #1C4633 0%, #2d5a47 100%);
+  color: #fff;
+  box-shadow: 0 2px 4px rgba(28, 70, 51, 0.2);
+}
+
+.admin-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(28, 70, 51, 0.3);
+}
+
+.admin-btn-success {
+  background: linear-gradient(135deg, #059669 0%, #10B981 100%);
+  color: #fff;
+  box-shadow: 0 2px 4px rgba(5, 150, 105, 0.2);
+}
+
+.admin-btn-success:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3);
+}
+
+.admin-btn-danger {
+  background: linear-gradient(135deg, #DC2626 0%, #EF4444 100%);
+  color: #fff;
+  box-shadow: 0 2px 4px rgba(220, 38, 38, 0.2);
+}
+
+.admin-btn-danger:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+}
+
+.admin-btn-ghost {
+  background: transparent;
+  color: #6B7280;
+  border: 1px solid #E5E7EB;
+}
+
+.admin-btn-ghost:hover {
+  background: #F3F4F6;
+  color: #374151;
+  border-color: #D1D5DB;
+}
+
+/* Admin Badges */
+.admin-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.admin-badge-success {
+  background: rgba(5, 150, 105, 0.1);
+  color: #059669;
+}
+
+.admin-badge-warning {
+  background: rgba(245, 158, 11, 0.1);
+  color: #D97706;
+}
+
+.admin-badge-danger {
+  background: rgba(220, 38, 38, 0.1);
+  color: #DC2626;
+}
+
+.admin-badge-info {
+  background: rgba(59, 130, 246, 0.1);
+  color: #2563EB;
+}
+
+.admin-badge-purple {
+  background: rgba(139, 92, 246, 0.1);
+  color: #7C3AED;
+}
+
+/* Admin Search & Filters */
+.admin-search-input {
+  width: 100%;
+  padding: 12px 16px 12px 44px;
+  border: 1px solid #E5E7EB;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  background: #fff;
+  transition: all 0.2s ease;
+}
+
+.admin-search-input:focus {
+  outline: none;
+  border-color: #1C4633;
+  box-shadow: 0 0 0 3px rgba(28, 70, 51, 0.1);
+}
+
+.admin-select {
+  padding: 12px 40px 12px 16px;
+  border: 1px solid #E5E7EB;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%236B7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 12px center;
+  appearance: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.admin-select:focus {
+  outline: none;
+  border-color: #1C4633;
+  box-shadow: 0 0 0 3px rgba(28, 70, 51, 0.1);
+}
+
+/* Admin Filter Tabs */
+.admin-filter-tabs {
+  display: flex;
+  gap: 8px;
+  padding: 4px;
+  background: #F3F4F6;
+  border-radius: 12px;
+}
+
+.admin-filter-tab {
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #6B7280;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.admin-filter-tab:hover {
+  color: #374151;
+}
+
+.admin-filter-tab.active {
+  background: #fff;
+  color: #1C4633;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Admin Page Header */
+.admin-page-header {
+  margin-bottom: 32px;
+}
+
+.admin-page-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1C4633;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+
+.admin-page-subtitle {
+  font-size: 1rem;
+  color: #6B7280;
+}
+
+/* Admin Avatar */
+.admin-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #fff;
+  background: linear-gradient(135deg, #1C4633 0%, #2d5a47 100%);
+}
+
+/* Admin Empty State */
+.admin-empty-state {
+  text-align: center;
+  padding: 64px 24px;
+}
+
+.admin-empty-state svg {
+  width: 64px;
+  height: 64px;
+  color: #D1D5DB;
+  margin-bottom: 16px;
+}
+
+.admin-empty-state h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 8px;
+}
+
+.admin-empty-state p {
+  font-size: 0.875rem;
+  color: #9CA3AF;
+}
+
+/* Admin Section Header */
+.admin-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.admin-section-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1C4633;
+}
+
+/* Quick Actions Grid */
+.admin-quick-actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.admin-quick-action {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  background: #fff;
+  border: 1px solid rgba(28, 70, 51, 0.08);
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.admin-quick-action:hover {
+  border-color: #1C4633;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(28, 70, 51, 0.1);
+}
+
+.admin-quick-action-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.admin-quick-action-text h4 {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #1C4633;
+  margin-bottom: 4px;
+}
+
+.admin-quick-action-text p {
+  font-size: 0.8125rem;
+  color: #6B7280;
+}
+
+/* Comment Card for Admin */
+.admin-comment-card {
+  background: #fff;
+  border-radius: 16px;
+  border: 1px solid rgba(28, 70, 51, 0.08);
+  padding: 24px;
+  transition: all 0.3s ease;
+}
+
+.admin-comment-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.admin-comment-content {
+  font-size: 1rem;
+  color: #374151;
+  line-height: 1.6;
+  margin: 16px 0;
+  padding: 16px;
+  background: #F9FAFB;
+  border-radius: 12px;
+}
+
+.admin-comment-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  font-size: 0.875rem;
+  color: #6B7280;
+}
+
+.admin-comment-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #F3F4F6;
+}
+
+/* Loading Spinner */
+.admin-spinner {
+  width: 48px;
+  height: 48px;
+  border: 3px solid #F3F4F6;
+  border-top-color: #1C4633;
+  border-radius: 50%;
+  animation: admin-spin 0.8s linear infinite;
+}
+
+@keyframes admin-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .admin-sidebar {
+    width: 240px;
+  }
+  
+  .admin-main-content {
+    margin-left: 240px;
+  }
+  
+  .admin-content {
+    margin-left: 240px;
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-sidebar {
+    display: none;
+  }
+  
+  .admin-main-content {
+    margin-left: 0;
+  }
+  
+  .admin-content {
+    margin-left: 0;
+  }
+  
+  .admin-stat-value {
+    font-size: 1.75rem;
+  }
+}
+
+/* Place Details Popup Styles */
+.place-details-popup .mapboxgl-popup-content {
+  padding: 0 !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15) !important;
+  border: 1px solid rgba(28, 70, 51, 0.1) !important;
+  overflow: visible;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.place-details-popup .mapboxgl-popup-close-button {
+  font-size: 18px;
+  color: #999;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  right: 6px;
+  top: 6px;
+  transition: all 0.2s ease;
+  border-radius: 6px;
+  z-index: 20;
+  background: white;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.place-details-popup .mapboxgl-popup-close-button:hover {
+  background: #f3f4f6;
+  color: #1C4633;
+}
+
+.place-details-popup .mapboxgl-popup-tip {
+  border-top-color: white !important;
+}
+
+/* Map rounded corners */
+.mapboxgl-map,
+.mapboxgl-map > div,
+.mapboxgl-canvas-container,
+.mapboxgl-canvas-container > canvas {
+  border-radius: inherit !important;
+}
+
+/* Ensure map container has rounded corners */
+.map-container-rounded {
+  border-radius: 1rem !important;
+  overflow: hidden !important;
+}
+
+.map-container-rounded .mapboxgl-map,
+.map-container-rounded .mapboxgl-canvas-container,
+.map-container-rounded .mapboxgl-canvas {
+  border-radius: 1rem !important;
+}

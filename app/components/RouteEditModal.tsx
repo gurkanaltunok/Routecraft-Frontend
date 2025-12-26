@@ -111,7 +111,7 @@ export default function RouteEditModal({ isOpen, onClose, travelPlan, onSave }: 
   if (!isOpen) return null;
 
   const currentCoverImage = travelPlan.coverImageUrl 
-    ? `${process.env.NEXT_PUBLIC_API_URL || 'http://13.53.168.27:5000'}${travelPlan.coverImageUrl}`
+    ? `${process.env.NEXT_PUBLIC_API_URL || 'https://routecraft.duckdns.org'}${travelPlan.coverImageUrl}`
     : null;
 
   return (

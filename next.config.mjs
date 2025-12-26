@@ -6,7 +6,7 @@ const nextConfig = {
   // Azure Static Web Apps için standalone output
   output: process.env.NODE_ENV === 'production' ? 'standalone' : undefined,
   env: {
-    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || 'http://13.53.168.27:5000',
+    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || 'https://routecraft.duckdns.org',
   },
   typescript: {
     // TypeScript hataları olsa bile build'e devam et

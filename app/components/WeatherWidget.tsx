@@ -178,7 +178,7 @@ export default function WeatherWidget({ latitude, longitude, className = '' }: W
         }
         
         // Always fetch from backend to keep API key secure
-        const backendUrl = process.env.NEXT_PUBLIC_API_URL || 'http://13.53.168.27:5000';
+        const backendUrl = process.env.NEXT_PUBLIC_API_URL || 'https://routecraft.duckdns.org';
         const response = await fetch(
           `${backendUrl}/api/config/weather?lat=${latitude}&lon=${longitude}`
         );

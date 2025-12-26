@@ -33,7 +33,7 @@ const difficultyColors: Record<number, string> = {
 const getImageUrl = (imageUrl?: string | null) => {
   if (!imageUrl) return null;
   if (imageUrl.startsWith('http')) return imageUrl;
-  return `${process.env.NEXT_PUBLIC_API_URL || 'http://13.53.168.27:5000'}${imageUrl}`;
+  return `${process.env.NEXT_PUBLIC_API_URL || 'https://routecraft.duckdns.org'}${imageUrl}`;
 };
 
 export default function GroupDetailPage() {

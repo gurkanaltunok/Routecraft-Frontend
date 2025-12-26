@@ -222,7 +222,7 @@ export default function ChatWidget() {
   const getImageUrl = (imageUrl?: string) => {
     if (!imageUrl) return null;
     if (imageUrl.startsWith('http')) return imageUrl;
-    return `${process.env.NEXT_PUBLIC_API_URL || 'http://13.53.168.27:5000'}${imageUrl}`;
+    return `${process.env.NEXT_PUBLIC_API_URL || 'https://routecraft.duckdns.org'}${imageUrl}`;
   };
 
   if (!isAuthenticated) return null;

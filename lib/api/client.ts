@@ -1,4 +1,4 @@
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://13.53.168.27:5000';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://routecraft.duckdns.org';
 
 class ApiClient {
   private baseUrl: string;

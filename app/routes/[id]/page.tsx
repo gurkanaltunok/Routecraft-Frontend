@@ -53,7 +53,7 @@ const routeTypeLabels: Record<number, string> = {
 const getImageUrl = (imageUrl?: string | null) => {
   if (!imageUrl) return null;
   if (imageUrl.startsWith('http')) return imageUrl;
-  return `${process.env.NEXT_PUBLIC_API_URL || 'http://13.53.168.27:5000'}${imageUrl}`;
+  return `${process.env.NEXT_PUBLIC_API_URL || 'https://routecraft.duckdns.org'}${imageUrl}`;
 };
 
 function RouteDetailPageContent() {
@@ -262,7 +262,7 @@ function RouteDetailPageContent() {
   const fetchPlaceDetails = async (placeId: string) => {
     setIsLoadingPlaceDetails(true);
     try {
-      const backendUrl = process.env.NEXT_PUBLIC_API_URL || 'http://13.53.168.27:5000';
+      const backendUrl = process.env.NEXT_PUBLIC_API_URL || 'https://routecraft.duckdns.org';
       const response = await fetch(`${backendUrl}/api/config/place-details?placeId=${encodeURIComponent(placeId)}`);
       if (!response.ok) throw new Error('Failed to fetch place details');
       const data = await response.json();
@@ -591,7 +591,7 @@ function RouteDetailPageContent() {
                         {placeDetails.photos && placeDetails.photos.length > 0 && (
                           <div className="relative h-24 w-full overflow-hidden">
                             <img
-                              src={`${process.env.NEXT_PUBLIC_API_URL || 'http://13.53.168.27:5000'}/api/config/place-photo?photoReference=${encodeURIComponent(placeDetails.photos[0].photo_reference)}&maxWidth=400`}
+                              src={`${process.env.NEXT_PUBLIC_API_URL || 'https://routecraft.duckdns.org'}/api/config/place-photo?photoReference=${encodeURIComponent(placeDetails.photos[0].photo_reference)}&maxWidth=400`}
                               alt={placeDetails.name}
                               className="w-full h-full object-cover"
                               onError={(e) => {

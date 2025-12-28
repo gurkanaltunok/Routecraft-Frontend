@@ -4,7 +4,7 @@ import "./globals.css";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { ToastProvider } from "@/contexts/ToastContext";
 import ChatWidget from "@/app/components/ChatWidget";
-import { GoogleTagManager } from '@next/third-parties/google';
+import { GoogleTagManager, GoogleAnalytics } from '@next/third-parties/google';
 
 const inter = Inter({
   subsets: ["latin"],
@@ -29,6 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <GoogleTagManager gtmId="GTM-NG76FRCZ" />
+      <GoogleAnalytics gaId="G-TEECWJKP7F" />
       <body
         className={`${inter.variable} font-sans antialiased`}
       >
